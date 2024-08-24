@@ -5,14 +5,19 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import utilities.Keywords;
+
 
 public class LoginPage {
 
 	WebDriver driver;
+	Keywords keywords;
 
 	public LoginPage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
+		keywords= new Keywords();
+		
 	}
 
 	@FindBy(id = "userName")
@@ -36,7 +41,7 @@ public class LoginPage {
 	
 	public void click_button()
 	{
-		button_login.click();
+		keywords.customCick(button_login, driver);
 	}
 	public void do_login(String userName, String password)
 	{
