@@ -25,6 +25,7 @@ public class Hooks_Defs{
 		System.out.print("Inside setup \n");
 		driver = baseClass.initlizeBrowser();
 		testContext.setDriver(driver);
+		testContext.initlizePageObjects(driver);
 
 	}
 
