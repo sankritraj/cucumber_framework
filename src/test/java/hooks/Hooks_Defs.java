@@ -25,7 +25,7 @@ public class Hooks_Defs {
 	}
 
 	@Before
-	public void setUp() {
+	public void setUp(Scenario scenario) {
 		System.out.print("Inside setup \n");
 		driver = baseClass.initlizeBrowser();
 		testContext.setDriver(driver);
