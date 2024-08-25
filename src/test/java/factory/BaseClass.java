@@ -60,6 +60,7 @@ public class BaseClass {
 			switch (browser) {
 			case "chrome":
 				desiredCapabilities.setBrowserName("chrome");
+				LOGGER.info("The thread ID for Chrome is "+ Thread.currentThread().threadId());
 				break;
 			case "firefox":
 				desiredCapabilities.setBrowserName("firefox");
