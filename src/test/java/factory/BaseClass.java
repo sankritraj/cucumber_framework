@@ -51,10 +51,14 @@ public class BaseClass {
 			case "WINDOW":
 				desiredCapabilities.setPlatform(Platform.WIN11);
 				break;
+			case "LINUX":
+				desiredCapabilities.setPlatform(Platform.LINUX);
+				break;
 			default:
 				System.out.print("No platfrom found");
 				driver = null;
 				LOGGER.error("No platfrom found with name " + platformName);
+				return driver;
 
 			}
 			switch (browser) {
