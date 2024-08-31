@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-
-# Cucumber Framework with Maven, Selenium 4, Selenium Grid, Log4j, and Docker
-=======
 # Cucumber Framework with Maven, Selenium 4, Selenium Grid, and Docker
->>>>>>> 54c7ddcecf90b8e1df1100505308e1425f2472ad
 
 ## Table of Contents
 
@@ -11,8 +6,6 @@
 - [Prerequisites](#prerequisites)
 - [Project Structure](#project-structure)
 - [Setup and Installation](#setup-and-installation)
-<<<<<<< HEAD
-=======
 - [Running Tests](#running-tests)
 
 ## Introduction
@@ -66,16 +59,6 @@ project-root/
 ```bash
 cd Cucumber-Selenium-Docker
 ```
-
-   Clone this repository to your local machine using the following command:
-
-   ```bash
-   git clone https://github.com/your-username/Cucumber-Selenium-Docker.git
-   
-2. Navigate to the Project Directory:
-cd Cucumber-Selenium-Docker
-
-
 3. Install Dependencies:
 
 Use Maven to install the necessary dependencies:
@@ -83,8 +66,6 @@ Use Maven to install the necessary dependencies:
 ```bash
 mvn clean install
 ```
-mvn clean install
-
 4. Configure Test Settings:
 
 Update the config files as per your test environment requirements. Configuration files can include settings for Selenium Grid, browser types, URLs, etc.
@@ -119,6 +100,3 @@ Ensure you have a log4j2.xml file in the src/test/resources directory. Here's a 
     </Loggers>
 </Configuration>
 
-
-
->>>>>>> 54c7ddcecf90b8e1df1100505308e1425f2472ad
