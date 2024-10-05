@@ -1,5 +1,6 @@
 package factory;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -28,7 +29,7 @@ public class BaseClass {
 
 	public BaseClass(TestContext testContext) {
 		this.testContext = testContext;
-		PropertyConfigurator.configure(System.getProperty("user.dir") + "\\log4j.properties");
+		PropertyConfigurator.configure(System.getProperty("user.dir") + File.separator + "log4j.properties");
 	}
 
 	@SuppressWarnings("deprecation")
@@ -39,11 +40,14 @@ public class BaseClass {
 		String browser = testContext.getProperies().getProperty("browser").toLowerCase();
 		System.out.print("Browser is :" + browser + "\n");
 		LOGGER.info("Browser " + browser + " is launched");
+		String username = "inclusiveniraj1";
+		String accesskey = "9xHnsL4HgsvH1odOxDlYU0ZDEBPsb7HHyyksNSRjYZUZYzKmhG";
 
 		/* checking execution location */
 		String location = testContext.getProperies().getProperty("environment").toLowerCase();
 		if (location.equalsIgnoreCase("remote")) {
 			String hubUrl = testContext.getProperies().getProperty("hubUrl");
+			String remoteHubUrl = testContext.getProperies().getProperty("remoteHubUrl");
 			DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
 			String platformName = testContext.getProperies().getProperty("platform").toUpperCase();
 
@@ -64,7 +68,7 @@ public class BaseClass {
 			switch (browser) {
 			case "chrome":
 				desiredCapabilities.setBrowserName("chrome");
-				LOGGER.info("The thread ID for Chrome is "+ Thread.currentThread().threadId());
+				LOGGER.info("The thread ID for Chrome is " + Thread.currentThread().threadId());
 				break;
 			case "firefox":
 				desiredCapabilities.setBrowserName("firefox");
@@ -77,7 +81,12 @@ public class BaseClass {
 				LOGGER.error("No Browser found with name " + browser);
 			}
 			try {
-				driver = new RemoteWebDriver(new URL(hubUrl), desiredCapabilities);
+				if (p.getProperty("remoteExecution").equalsIgnoreCase("yes")) {
+					driver = new RemoteWebDriver(new URL("https://" + username + ":" + accesskey + remoteHubUrl),
+							desiredCapabilities);
+				} else {
+					driver = new RemoteWebDriver(new URL(hubUrl), desiredCapabilities);
+				}
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -112,18 +121,17 @@ public class BaseClass {
 
 	public Properties properties() {
 		try {
-			FileReader fileReader = new FileReader(
-					System.getProperty("user.dir") + "\\src\\test\\resources\\config.properties");
-			LOGGER.info("Properties file for config is picked from " + System.getProperty("user.dir")
-					+ "\\src\\test\\resources\\config.properties");
+			FileReader fileReader = new FileReader(System.getProperty("user.dir") + File.separator + "src"
+					+ File.separator + "test" + File.separator + "resources" + File.separator + "config.properties");
+			LOGGER.info("Properties file for config is picked from " + System.getProperty("user.dir") + File.separator
+					+ "src" + File.separator + "test" + File.separator + "resources" + File.separator
+					+ "config.properties");
 			p = new Properties();
 			p.load(fileReader);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.error(e.getMessage());
 		}
 		return p;
-
 	}
 
 }
